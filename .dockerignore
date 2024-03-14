@@ -1,0 +1,19 @@
+FROM node:18-alpine
+
+# set the working directory
+WORKDIR /app
+
+# copy over the dependency files
+COPY package.json ./
+COPY package-lock.json ./
+
+RUN npm install --production
+
+ENV NODE_ENV="production"
+
+# copy over the project
+COPY . .
+
+EXPOSE 3000
+
+CMD ["node", "index.js"]
